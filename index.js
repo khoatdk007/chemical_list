@@ -43,6 +43,6 @@ app.get("/", function (req, res) {
         res.end();
     });
 });
-app.listen(process.env.PORT, process.env.IP, function() {
+app.listen(process.env.PORT || 8080, function() {
     console.log("Listening at " +  8080 );
 });
