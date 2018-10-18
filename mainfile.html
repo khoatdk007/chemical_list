@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        body {
+            text-align: center;
+        }
+        input::placeholder {
+            color: gainsboro;
+        }
+        input {
+            background: white;
+            height: 30px;
+            width: 300px;
+            padding: 5px;
+            border: none;
+            box-shadow: 0 0 5px 0 gray;
+            color: black;
+        }
+        button {
+            background: linear-gradient(lightblue, blue);
+            color: white;
+            border: none;
+            height: 30px;
+            line-height: 30px;
+            width: 80px;
+            text-align: center;
+        }
+        button:active {
+            background: linear-gradient(blue, lightblue);
+        }
+        div p {
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <input type="text" name="q" id="search" placeholder="Nhập tên nguyên tố cần tìm..." onkeyup="getData()" autocomplete="off">
+    <button onclick="getData()">Tìm kiếm</button>
+    <div id="result"></div>
+    <script>
+        if (document.getElementById("search").value === "") getData();
+        function check(e) {
+            if (e.keyCode == 13) {
+                getData();
+            }
+        }
+        function getData() {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("result").innerHTML = this.responseText;
+                }
+            };
+            xhttp.open("GET", "/search?name="+document.getElementById("search").value);
+            xhttp.send();
+        }
+    </script>
+</body>
+</html>
